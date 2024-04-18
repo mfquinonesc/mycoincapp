@@ -10,6 +10,11 @@ export class ConfirmComponent {
   codeNumber: string = '';
   count: number = 4;
 
+  error:string = '¡Debe confirmar su contraseña!';
+  wellcome:string = '¡Su cuenta ha sido creada!';
+
+  isDone:boolean = false;
+
   constructor(private router: Router) { }
 
   get isEnable() {
@@ -35,7 +40,8 @@ export class ConfirmComponent {
 
   goForward() {
     if (this.isEnable) {
-      alert('OK');
+      // this.router.navigateByUrl('/loader');
+      this.isDone = true;
     }
   }
 

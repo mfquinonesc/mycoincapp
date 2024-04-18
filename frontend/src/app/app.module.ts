@@ -14,6 +14,10 @@ import { VerifyComponent } from './views/verify/verify.component';
 import { IdtypeComponent } from './views/idtype/idtype.component';
 import { PasswordComponent } from './views/password/password.component';
 import { ConfirmComponent } from './views/confirm/confirm.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { HomeComponent } from './views/home/home.component';
+import { MessageComponent } from './components/message/message.component';
+import { BlueiconComponent } from './components/blueicon/blueicon.component';
 
 
 @NgModule({
@@ -28,7 +32,11 @@ import { ConfirmComponent } from './views/confirm/confirm.component';
     VerifyComponent,
     IdtypeComponent,   
     PasswordComponent,
-    ConfirmComponent,   
+    ConfirmComponent,
+    LoaderComponent,
+    HomeComponent,
+    MessageComponent,
+    BlueiconComponent,   
   ],
   imports: [
     BrowserModule,

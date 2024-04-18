@@ -8,6 +8,7 @@ import { VerifyComponent } from './views/verify/verify.component';
 import { IdtypeComponent } from './views/idtype/idtype.component';
 import { PasswordComponent } from './views/password/password.component';
 import { ConfirmComponent } from './views/confirm/confirm.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 const routes: Routes = [
   { path: '', component: IntroComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'idtype', component: IdtypeComponent },
   { path: 'password', component: PasswordComponent },
   { path: 'confirm', component: ConfirmComponent },
+  { path: 'loader', component: LoaderComponent },
 ];
 
 @NgModule({

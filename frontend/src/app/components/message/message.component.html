@@ -1,0 +1,14 @@
+<section class="sl-hero sl-screen-over sl-light-secundary-bg sl-flex-column-center sl-ph-12"
+    [style]="isVisible?'display: flex;':'display: none;'">
+    <div class="sl-width-80 sl-white-bg sl-flex-column-center sl-border-radius-1 sl-light-secundary-border">
+        <div class="sl-width-100 sl-p-3 sl-flex-column-center">
+            <p class="sl-secundary-text-1">{{message}}</p>
+        </div>
+        <ul class="sl-width-100 sl-flex-row-space-between sl-p-3 sl-secundary-border-top">
+            <li class="sl-height-100 sl-width-100 sl-flex-row-center"><a class="sl-secundary-link-1"
+                    (click)="acept()">ACEPTAR</a></li>
+            <li *ngIf="hasCancel" class="sl-height-100 sl-width-100 sl-flex-row-center sl-secundary-border-left"><a
+                    class="sl-secundary-link-1" (click)="cancel()">CANCELAR</a></li>
+        </ul>
+    </div>
+</section>

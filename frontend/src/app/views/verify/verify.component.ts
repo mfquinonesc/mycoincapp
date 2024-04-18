@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class VerifyComponent {
   codeNumber: string = '';
   count: number = 4;
+  message:string = '¡Recivirá un mensaje con el número de verificación!';
 
   constructor(private router: Router) { }
 
