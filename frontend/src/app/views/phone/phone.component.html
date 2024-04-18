@@ -1,0 +1,18 @@
+<section class="sl-hero sl-primary-bg sl-flex-column-space-between sl-ph-12">
+    <div class="sl-width-80 sl-flex-left-top">         
+        <h1 class="sl-secundary-title-2">Tu número de celular</h1>
+        <div class="sl-width-100 sl-flex-column-center sl-mt-6">
+            <p class="sl-quaternary-bg sl-width-100 sl-border-radius-1 sl-secundary-text-4 sl-pw-2 sl-flex-column-center"
+                style="height: 3rem;">
+                {{phoneNumber}}</p>
+        </div>
+    </div>
+    <div class="sl-width-80 sl-flex-column-center">
+        <app-keyword style="width: 100%;" [count]="count" (typeEvent)="writeText($event)"></app-keyword>
+    </div>
+    <div class="sl-width-80 sl-flex-column-center">
+        <button [ngClass]="isEnable?'sl-width-100 sl-secundary-btn sl-btn':'sl-width-100 sl-quaternary-btn sl-btn'"
+            type="button" (click)="goForward()" [disabled]="!isEnable">SIGUIENTE</button>
+        <button class="sl-width-100 sl-secundary-btn sl-btn sl-mt-4" type="button" (click)="goBackward()">ATRAS</button>
+    </div>
+</section>

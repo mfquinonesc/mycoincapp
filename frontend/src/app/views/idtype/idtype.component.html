@@ -1,0 +1,21 @@
+<section class="sl-hero sl-primary-bg sl-flex-column-space-between sl-ph-12">
+    <div class="sl-width-80 sl-flex-left-top">
+        <h1 class="sl-secundary-title-2">Tipo de documento</h1>
+    </div>
+    <div class="sl-width-80 sl-flex-column-center">
+        <p class="sl-quaternary-bg sl-width-100 sl-border-radius-1 sl-secundary-text-1 sl-pw-2 sl-flex-column-center"
+            style="height: 3rem;">{{document}}
+            </p>
+    </div>
+    <div class="sl-width-80 sl-flex-column-center">  
+       <div *ngFor="let doc of documentType" class="sl-quaternary-bg sl-width-100 sl-border-radius-1 sl-secundary-border sl-p-3 sl-mh-1" style="cursor: pointer;" 
+       (click)="selectDoc(doc)">
+               <p class="sl-secundary-text-2">{{doc}}</p> 
+       </div>
+    </div>
+    <div class="sl-width-80 sl-flex-column-center">
+        <button [ngClass]="isSelected?'sl-width-100 sl-secundary-btn sl-btn':'sl-width-100 sl-quaternary-btn sl-btn'"
+            type="button"  [disabled]="!isSelected" (click)="goForward()">SIGUIENTE</button>
+        <button class="sl-width-100 sl-secundary-btn sl-btn sl-mt-4" type="button" (click)="goBackward()">ATRAS</button>
+    </div>
+</section>
