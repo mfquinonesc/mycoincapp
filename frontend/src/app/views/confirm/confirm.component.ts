@@ -18,7 +18,7 @@ export class ConfirmComponent {
   constructor(private router: Router) { }
 
   get isEnable() {
-    return (this.codeNumber.length == this.count);
+    return (this.codeNumber.length >= this.count);
   }
 
   get code1() {

@@ -18,6 +18,11 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { HomeComponent } from './views/home/home.component';
 import { MessageComponent } from './components/message/message.component';
 import { BlueiconComponent } from './components/blueicon/blueicon.component';
+import { SigninComponent } from './views/signin/signin.component';
+import { SendmoneyComponent } from './components/sendmoney/sendmoney.component';
+import { LedgerComponent } from './components/ledger/ledger.component';
+import { WhiteiconComponent } from './components/whiteicon/whiteicon.component';
+import { InfoComponent } from './components/info/info.component';
 
 
 @NgModule({
@@ -36,7 +41,12 @@ import { BlueiconComponent } from './components/blueicon/blueicon.component';
     LoaderComponent,
     HomeComponent,
     MessageComponent,
-    BlueiconComponent,   
+    BlueiconComponent,
+    SigninComponent,
+    SendmoneyComponent,
+    LedgerComponent,
+    WhiteiconComponent,
+    InfoComponent,   
   ],
   imports: [
     BrowserModule,

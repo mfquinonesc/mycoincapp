@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-password',
-  templateUrl: './password.component.html',
-  styleUrls: ['./password.component.css']
+  selector: 'app-signin',
+  templateUrl: './signin.component.html',
+  styleUrls: ['./signin.component.css']
 })
-export class PasswordComponent {
+export class SigninComponent {
+  
   codeNumber: string = '';
   count: number = 4;
 
@@ -35,12 +36,11 @@ export class PasswordComponent {
 
   goForward() {
     if (this.isEnable) {
-      this.router.navigateByUrl('/confirm');
+      this.router.navigateByUrl('/home');
     }
   }
 
-  goBackward() {
-    this.codeNumber = '';
-    this.router.navigateByUrl('/signup');
+  goBackward() {    
+    this.router.navigateByUrl('/sign');
   }
 }

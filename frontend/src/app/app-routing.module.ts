@@ -9,17 +9,21 @@ import { IdtypeComponent } from './views/idtype/idtype.component';
 import { PasswordComponent } from './views/password/password.component';
 import { ConfirmComponent } from './views/confirm/confirm.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { SigninComponent } from './views/signin/signin.component';
+import { HomeComponent } from './views/home/home.component';
 
 const routes: Routes = [
   { path: '', component: IntroComponent },
   { path: 'sign', component: SignComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'signin', component: SigninComponent },
   { path: 'phone', component: PhoneComponent },
   { path: 'verify', component: VerifyComponent },
   { path: 'idtype', component: IdtypeComponent },
   { path: 'password', component: PasswordComponent },
   { path: 'confirm', component: ConfirmComponent },
   { path: 'loader', component: LoaderComponent },
+  { path: 'home', component: HomeComponent }
 ];
 
 @NgModule({
