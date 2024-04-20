@@ -1,6 +1,8 @@
-const routes = require('express').Router();
+const router = require('express').Router();
 const transactionController = require('../controllers/transactionController');
 
-routes.post('', transactionController.createTransaction);
+router.post('', transactionController.createTransaction);
 
-module.exports = routes;
+router.get('/:phone', transactionController.getTransactionByPhone);
+
+module.exports = router;
