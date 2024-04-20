@@ -34,8 +34,8 @@ module.exports.patchUserByPhone = async (phone, body) => {
     try {
         const user = await userModel.findOne({ phone: phone });
         if (user) {
-            const { firstName, lastName, email, budget } = body;
-            const uuser = await userModel.findByIdAndUpdate(user.id, { firstName, lastName, email, password, budget }, { returnDocument: 'after' });
+            const { firstName, lastName, budget } = body;
+            const uuser = await userModel.findByIdAndUpdate(user.id, { firstName, lastName, budget }, { returnDocument: 'after' });
             return response.getSuccess(uuser.phone);
         } else {
             return response.getException('¡Este número telefónico no esta registrado!');
