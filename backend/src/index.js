@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const userRoutes = require('./routes/userRoutes');
 const codeRoutes = require('./routes/codeRoutes');
+const authRoutes = require('./routes/authRoutes');
 const transactionRoutes = require('./routes/transactionRoutes');
 
 dotenv.config()
@@ -22,17 +23,15 @@ app.use(express.json());
 
 
 //Configuring the database connection
-mongoose.connect(DB, {
-    // useNewUrlParser: true,
-    // useUnifiedTopology: true,
-}).then(() => console.log(`Connected to: ${DB}`))
+mongoose.connect(DB).then(() =>
+    console.log(`Connected to: ${DB}`))
     .catch((error) => console.log(error));
 
 //Configuring the routes
-app.use('/api/v1/user',userRoutes);
-app.use('/api/v1/code',codeRoutes);
-app.use('/api/v1/transaction',transactionRoutes);
-
+app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/code', codeRoutes);
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/transaction', transactionRoutes);
 
 //Configuring the server 
 app.listen(3000, () => {

@@ -4,8 +4,8 @@ const response = require('../utilities/response');
 module.exports.createTransaction = async (body) => {
     try {
         const date = new Date();
-        const { fromPhone, toPhone, amount } = body;
-        const transaction = await transactionModel.create({ fromPhone, toPhone, amount, date });
+        const { fromPhone, toPhone, amount, description } = body;
+        const transaction = await transactionModel.create({ fromPhone, toPhone, amount, date, description });
         if (transaction) {
             return response.getSuccess(transaction.id);
         } else {
@@ -29,10 +29,7 @@ module.exports.getTransactionByPhone = async (phone) => {
                 element.amount = Math.abs(element.amount);
             });
             const arrPhone = arrFrom.concat(arrTo);
-            const arrSorted = arrPhone.sort((a, b) => {
-                a.date - b.date
-            });
-            return response.getSuccess(arrSorted.reverse());
+            return response.getSuccess(arrPhone);
         } else {
             return response.getUnknownException();
         }

@@ -10,7 +10,7 @@ module.exports.createTransaction = async (req, res) => {
     if (reciever.status && sender.status) {
         if (sender.obj.budget >= Math.abs(amount)) {
             const userReciever = reciever.obj;
-            const userSender = sender.obj;           
+            const userSender = sender.obj;
             userReciever.budget = userReciever.budget + Math.abs(amount);
             userSender.budget = userSender.budget - Math.abs(amount);
             await userService.patchUserByPhone(toPhone, userReciever);

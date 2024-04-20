@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const transactionSchema = new mongoose.Schema({
     fromPhone: {
         type: Number,
-        required: true,        
+        required: true,
     },
     toPhone: {
         type: Number,
-        required: true,        
+        required: true,
     },
     date: {
         type: Date,
@@ -16,6 +16,9 @@ const transactionSchema = new mongoose.Schema({
     amount: {
         type: Number,
         required: true,
+    },
+    description: {
+        type: String,
     }
 });
 
