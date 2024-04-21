@@ -23,6 +23,7 @@ import { SendmoneyComponent } from './components/sendmoney/sendmoney.component';
 import { LedgerComponent } from './components/ledger/ledger.component';
 import { WhiteiconComponent } from './components/whiteicon/whiteicon.component';
 import { InfoComponent } from './components/info/info.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { InfoComponent } from './components/info/info.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule   
   ],
   providers: [],
   bootstrap: [AppComponent]

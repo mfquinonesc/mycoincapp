@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserModel } from 'src/app/models/user-model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-idtype',
@@ -8,11 +10,11 @@ import { Router } from '@angular/router';
 })
 export class IdtypeComponent {
 
-  constructor(private router:Router){}
+  constructor(private router: Router, private userService: UserService) { }
 
   document: string = '';
 
-  documentType: string[] = [
+  documentTypeArray: string[] = [
     'Cédula de ciudadanía',
     'Cédula de extranjería',
     'Tarjeta de identidad',
@@ -29,13 +31,22 @@ export class IdtypeComponent {
 
   goForward() {
     if (this.isSelected) {
-      this.router.navigateByUrl('/signup');
+      const userAccount = new UserModel();
+      this.userService.getCode().subscribe({
+        next: (value) => {
+          userAccount.phone = value.phone;
+          userAccount.docType = this.document;
+          this.userService.setUserAccount(userAccount);
+          this.router.navigateByUrl('/signup');
+        },
+      });
     }
   }
 
   goBackward() {
     this.document = '';
-    this.router.navigateByUrl('/phone');
+    this.userService.setCode({ phone: 0 });
+    this.router.navigateByUrl('/sign');
   }
 
 }

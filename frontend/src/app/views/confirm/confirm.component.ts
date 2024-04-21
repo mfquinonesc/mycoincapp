@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserModel } from 'src/app/models/user-model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-confirm',
@@ -10,12 +12,13 @@ export class ConfirmComponent {
   codeNumber: string = '';
   count: number = 4;
 
-  error:string = '¡Debe confirmar su contraseña!';
-  wellcome:string = '¡Su cuenta ha sido creada!';
+  error: string = '¡Debe confirmar su contraseña!';
+  wellcome: string = '¡Su cuenta ha sido creada!';
 
-  isDone:boolean = false;
+  isLoading: boolean = false;
+  isDone: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: UserService) { }
 
   get isEnable() {
     return (this.codeNumber.length >= this.count);
@@ -38,15 +41,43 @@ export class ConfirmComponent {
     this.codeNumber = value;
   }
 
+  createAccount() {
+    this.isLoading = true;
+    const password = this.codeNumber.substring(0, 4);       
+    this.userService.getUserAccount().subscribe({
+      next: (value) => {
+        const userAccount = value;        
+        if (password == userAccount.password) {
+          userAccount.budget = 0;
+          this.userService.createAccount(userAccount).subscribe({
+            next: (result) => {
+              if(result.status){                
+                this.router.navigateByUrl('/home');
+              }else{
+                alert(result.obj);
+              }
+            },
+            complete: () => {
+              this.isLoading = false;
+            },
+          });
+        } else {
+          this.isLoading = false;
+          this.codeNumber = '';
+          alert('¡La contraseña no coincide!');
+        }
+      },
+    });
+  }
+
   goForward() {
     if (this.isEnable) {
-      // this.router.navigateByUrl('/loader');
-      this.isDone = true;
+      this.createAccount();
     }
   }
 
   goBackward() {
     this.codeNumber = '';
-    this.router.navigateByUrl('/sign');
+    this.router.navigateByUrl('/password');
   }
 }

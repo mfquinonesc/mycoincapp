@@ -11,7 +11,7 @@ export class KeywordComponent {
   @Output() doneEvent = new EventEmitter<boolean>();
   @Input() count: number = 10;
 
-  text: string = '';
+  @Input() text: string = '';
 
   get isDone() {
     return (this.text.length == this.count);

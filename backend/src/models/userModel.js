@@ -12,6 +12,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         uppercase: true,
     },
+    identification: {
+        type: Number,
+        required: true,
+    },
     phone: {
         type: Number,
         required: true,
@@ -31,6 +35,10 @@ const userSchema = new mongoose.Schema({
     budget: {
         type: Number,
         required: true,
+    },
+    docType: {
+        type: String,
+        uppercase: true,
     },
 });
 

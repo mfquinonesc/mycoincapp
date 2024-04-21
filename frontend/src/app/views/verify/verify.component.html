@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="sl-width-80 sl-flex-column-center">
-        <app-keyword style="width: 100%;" [count]="count" (typeEvent)="writeText($event)"></app-keyword>
+        <app-keyword style="width: 100%;" [count]="count" (typeEvent)="writeText($event)" [text]="codeNumber"></app-keyword>
     </div>
     <div class="sl-width-80 sl-flex-column-center">
         <button [ngClass]="isEnable?'sl-width-100 sl-secundary-btn sl-btn':'sl-width-100 sl-quaternary-btn sl-btn'"

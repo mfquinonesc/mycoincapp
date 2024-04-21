@@ -17,16 +17,17 @@
         </div>
     </div>
     <div class="sl-width-80 sl-flex-column-center">
-        <app-keyword style="width: 100%;" (typeEvent)="writeText($event)" [count]="count"></app-keyword>
+        <app-keyword style="width: 100%;" (typeEvent)="writeText($event)" [count]="count" [text]="codeNumber"></app-keyword>
     </div>
-    <div class="sl-width-80 sl-flex-column-center">
+    <form class="sl-width-80 sl-flex-column-center" (submit)="submit()" [formGroup]="signinForm">
         <div *ngIf="!isEnable" class="sl-input-group sl-secundary-input" style="margin-top: 0;">
-            <label for="firstName">Número telefónico</label>
-            <input id="firstName" placeholder=" NÚMERO" type="number" class="sl-quaternary-bg">
-            <span class="sl-input-icon"><i class="fa-solid fa-pen-nib"></i></span>
-            <!-- <small>Debe confirmar su email.</small>  -->
+            <label for="phone">Número telefónico</label>
+            <input formControlName="phone" id="phone" placeholder=" NÚMERO" type="number" class="sl-quaternary-bg">
+            <span class="sl-input-icon"><i class="fa-solid fa-phone"></i></span>
+            <!-- <small *ngIf="" >Debe ingresar su número de teléfono.</small> -->
         </div>
-        <button *ngIf="isEnable" class="sl-width-100 sl-secundary-btn sl-btn sl-mb-2 sl-mt-6" type="button" (click)="goForward()">INGRESAR</button>
-        <button class="sl-width-100 sl-secundary-btn sl-btn sl-mt-2" type="button" (click)="goBackward()">ATRAS</button>
-    </div>
+        <button *ngIf="isEnable" class="sl-width-100 sl-secundary-btn sl-btn sl-mb-2 sl-mt-6" type="submit" (click)="submit()">INGRESAR</button>
+        <button class="sl-width-100 sl-secundary-btn sl-btn sl-mt-2" type="button" (click)="goBackward()">ATRÁS</button>
+    </form>
 </section>
+<app-loader [isVisible]="isLoading"></app-loader>

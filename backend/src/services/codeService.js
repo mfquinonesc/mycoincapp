@@ -32,6 +32,24 @@ module.exports.getCodeByPhone = async (phone) => {
     }
 };
 
+module.exports.verifyPhoneAndCode = async (phone, code) => {
+    try {
+        const codemodel = await codeModel.findOne({ phone: phone });
+        if (codemodel) {
+            if (codemodel.code == code) {
+                return response.getSuccess(true);
+            } else {
+                return response.getException(false);
+            }
+        } else {
+            return response.getException('¡Este número telefónico no está registrado!');
+        }
+    }
+    catch (err) {
+        return response.getError(err);
+    }
+};
+
 module.exports.deleteCodeByPhone = async (phone) => {
     try {
         const codem = await codeModel.findOne({ phone: phone });

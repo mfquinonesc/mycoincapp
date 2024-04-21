@@ -5,6 +5,11 @@ module.exports.signIn = async (req, res) => {
     return res.send(done);
 };
 
+module.exports.signUp = async (req, res) => {    
+    const done = await authService.signUp(req.body);
+    return res.send(done);
+};
+
 module.exports.verify = async (req, res) => {
     const done = await authService.verify(req.headers);
     return res.send(done);

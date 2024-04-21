@@ -30,6 +30,22 @@ module.exports.signIn = async (body) => {
     }
 };
 
+module.exports.signUp = async (body) => {
+    try {
+        const { firstName, lastName, phone, email, password, budget, docType, identification } = body;
+        const user = await userModel.create({ firstName, lastName, phone, email, password, budget, docType, identification });
+        if (user) {
+            const token = jwt.sign(user.id, SECRETEWORD);
+            return response.getSuccess(token);
+        } else {
+            return response.getUnknownException();
+        }
+    }
+    catch (err) {
+        return response.getError(err);
+    }
+};
+
 module.exports.verify = async (headers) => {
     try {
         const token = headers[HEADER_NAME];
