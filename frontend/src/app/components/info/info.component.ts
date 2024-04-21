@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-info',
@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 })
 export class InfoComponent {
 
-  accountName: string = 'JHON DOE';
-  value: number = -15000;
+  @Input() description: string  = '';
+  @Input() value: number = -15000;
 
   get negative() {
     return `- $${Math.abs(this.value)}`;

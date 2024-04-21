@@ -7,7 +7,7 @@ module.exports.createTransaction = async (body) => {
         const { fromPhone, toPhone, amount, description } = body;
         const transaction = await transactionModel.create({ fromPhone, toPhone, amount, date, description });
         if (transaction) {
-            return response.getSuccess(transaction.id);
+            return response.getSuccess(transaction.date);
         } else {
             return response.getUnknownException();
         }

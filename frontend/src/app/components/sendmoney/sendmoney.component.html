@@ -1,27 +1,29 @@
-<div style="width: 100%;">
+<form style="width: 100%;" [formGroup]="transForm" (ngSubmit)="submit()">
     <div class="sl-input-group sl-secundary-input">
-        <label for="firstName">Número</label>
-        <input id="firstName" placeholder=" APELLIDO" type="text" class="sl-quaternary-bg">
-        <span class="sl-input-icon"><i class="fa-solid fa-pen-nib"></i></span>
-        <!-- <small>Debe ingresar su apellido.</small>  -->
+        <label for="toPhone">Número de teléfono</label>
+        <input formControlName="toPhone" id="toPhone" placeholder=" TELÉFONO" type="number" class="sl-quaternary-bg">
+        <span class="sl-input-icon"><i class="fa-solid fa-phone"></i></span>
+        <small *ngIf="toPhone.invalid && (toPhone.touched || toPhone.dirty)">Debe ingresar el número de destino.</small>
     </div>
 
     <div class="sl-input-group sl-secundary-input">
         <label for="description">Descripción</label>
-        <input id="description" placeholder=" DESCRIPCIÓN" type="text" class="sl-quaternary-bg">
-        <span class="sl-input-icon"><i class="fa-solid fa-pen-nib"></i></span>
-        <!-- <small>Debe ingresar su nombre.</small>  -->
+        <input formControlName="description" id="description" placeholder=" DESCRIPCIÓN" type="text"
+            class="sl-quaternary-bg">
+        <span class="sl-input-icon"><i class="fa-solid fa-comment"></i></span>
+        <small *ngIf="description.invalid && (description.dirty || description.touched)">Debe ingresar alguna
+            descripción.</small>
     </div>
 
     <div class="sl-input-group sl-secundary-input">
-        <label for="firstName">Monto</label>
-        <input id="firstName" placeholder=" IDENTIFICACIÓN" type="number" class="sl-quaternary-bg">
-        <span class="sl-input-icon"><i class="fa-solid fa-pen-nib"></i></span>
-        <!-- <small>Debe ingresar su número de identificación.</small>  -->
+        <label for="amount">Monto</label>
+        <input formControlName="amount" id="amount" placeholder=" MONTO" type="number" class="sl-quaternary-bg">
+        <span class="sl-input-icon"><i class="fa-solid fa-comment-dollar"></i></span>
+        <small *ngIf="amount.invalid && (amount.dirty || amount.touched)">Debe ingresar la cantidad a enviar.</small>
     </div>
 
     <div class="sl-input-group sl-secundary-input" style="margin-top: 1.5rem;">
-        <button class="sl-width-100 sl-secundary-btn sl-btn" type="button">ENVIAR</button>
+        <button class="sl-width-100 sl-secundary-btn sl-btn" type="submit">ENVIAR</button>
         <button class="sl-width-100 sl-secundary-btn sl-btn sl-mt-4" type="button">CANCELAR</button>
     </div>
-</div>
+</form>

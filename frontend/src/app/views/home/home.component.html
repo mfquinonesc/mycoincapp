@@ -3,22 +3,28 @@
         <p class="sl-secundary-text-1">HOLA <span class="sl-secundary-text-1">{{name}}</span></p>
         <ul class="sl-flex-row-space-between sl-width-100">
             <li><span class="sl-secundary-text-2">{{butget}}</span></li>
-            <li class="sl-btn sl-secundary-btn sl-flex-column-center" style="width: 3rem; height: 3rem;" (click)="logOut()"><i class="fa-solid fa-right-from-bracket"></i></li>
+            <li class="sl-btn sl-secundary-btn sl-flex-column-center" style="width: 3rem; height: 3rem;"
+                (click)="logOut()"><i class="fa-solid fa-right-from-bracket"></i></li>
         </ul>
     </div>
     <div class="sl-width-80 sl-flex-column-center">
-        <app-sendmoney  *ngIf="isSendmoney" style="width: 100%;"></app-sendmoney>
+        <app-sendmoney *ngIf="isSendmoney" style="width: 100%;"></app-sendmoney>
         <app-ledger *ngIf="isLedger" style="width: 100%;"></app-ledger>
-        <div *ngIf="isHome"  class="sl-width-100">
+        <div *ngIf="isHome" class="sl-width-100">
             <app-whiteicon></app-whiteicon>
         </div>
     </div>
     <div class="sl-width-80 sl-flex-column-center">
         <ul class="sl-flex-row-space-between sl-width-100">
-            <li class="sl-btn sl-secundary-btn sl-flex-column-center" style="width: 3rem; height: 3rem;" (click)="showHome()"><i class="fa-solid fa-house"></i></li>
-            <li class="sl-btn sl-secundary-btn sl-flex-column-center" style="width: 3rem; height: 3rem;" (click)="showHome()"><i class="fa-solid fa-file"></i></li>
-            <li class="sl-btn sl-secundary-btn sl-flex-column-center" style="width: 3rem; height: 3rem;" (click)="showLedger()"><i class="fa-solid fa-list-check"></i></li>
-            <li class="sl-btn sl-secundary-btn sl-flex-column-center" style="width: 3rem; height: 3rem;" (click)="showSendmoney()"><i class="fa-solid fa-sack-dollar"></i></li>
+            <li class="sl-btn sl-secundary-btn sl-flex-column-center" style="width: 3rem; height: 3rem;"
+                (click)="showHome()"><i class="fa-solid fa-house"></i></li>
+            <li class="sl-btn sl-secundary-btn sl-flex-column-center" style="width: 3rem; height: 3rem;"
+                (click)="showHome()"><i class="fa-solid fa-file"></i></li>
+            <li class="sl-btn sl-secundary-btn sl-flex-column-center" style="width: 3rem; height: 3rem;"
+                (click)="showLedger()"><i class="fa-solid fa-list-check"></i></li>
+            <li class="sl-btn sl-secundary-btn sl-flex-column-center" style="width: 3rem; height: 3rem;"
+                (click)="showSendmoney()"><i class="fa-solid fa-sack-dollar"></i></li>
         </ul>
     </div>
 </section>
+<app-loader></app-loader>

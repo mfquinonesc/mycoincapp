@@ -44,7 +44,7 @@ export class SignupComponent {
   }
 
   get isEmailValid() {
-    return (this.emailValue == this.emailConfirmValue);
+    return (this.emailValue == this.emailConfirmValue && this.emailValue );
   }
 
   get firstNameValue() {
