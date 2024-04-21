@@ -1,17 +1,17 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { TransactionModel } from 'src/app/models/transaction-model';
 import { UserModel } from 'src/app/models/user-model';
 import { TransactionService } from 'src/app/services/transaction.service';
 import { UserService } from 'src/app/services/user.service';
+import { Handler } from 'src/app/utilities/handler';
 
 @Component({
   selector: 'app-sendmoney',
   templateUrl: './sendmoney.component.html',
   styleUrls: ['./sendmoney.component.css']
 })
-export class SendmoneyComponent {
+export class SendmoneyComponent extends Handler {
 
   transForm = this.formBuilder.group({
     toPhone: ['', [Validators.required, Validators.maxLength(10)]],
@@ -19,13 +19,12 @@ export class SendmoneyComponent {
     amount: ['', [Validators.required, Validators.pattern(/^\d+$/)]]
   });
 
-  isLoading: boolean = false;
   fromPhone: number = 0;
 
-  @Output() loadEvent = new EventEmitter<boolean>(false);
+  @Output() cancelEvent = new EventEmitter<boolean>(false);
 
-
-  constructor( private formBuilder: FormBuilder, private transactionService: TransactionService, private userService: UserService) {
+  constructor(private formBuilder: FormBuilder, private transactionService: TransactionService, private userService: UserService) {
+    super();
     this.initialize();
   }
 
@@ -72,10 +71,13 @@ export class SendmoneyComponent {
     });
   }
 
+  cancel() {
+    this.cancelEvent.emit(true);
+  }
+
   submit() {
     if (this.transForm.valid) {
-      this.isLoading = true;
-      this.loadEvent.emit(this.isLoading);
+      this.showLoader();          
       const transaction = {
         toPhone: this.toPhoneValue,
         fromPhone: this.fromPhone,
@@ -84,17 +86,15 @@ export class SendmoneyComponent {
       } as TransactionModel;
       this.transactionService.sendTransaction(transaction).subscribe({
         next: (value) => {
-          if (value.status) {
-            alert('¡Transacción realizada!');
-          } else {
-            alert('¡No se pudo realizar la transacción!');
+          this.hideLoader();      
+          if (value.status) { 
+            this.transForm.reset();             
+            this.showAlert('¡Transacción realizada!');
+          } else {                 
+            this.showAlert(value.obj);
           }
-          this.updateButget();
-        },
-        complete: () => {
-          this.isLoading = false;
-          this.loadEvent.emit(this.isLoading);
-        },
+          this.updateButget();         
+        },       
       });
     }
   }

@@ -2,23 +2,21 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserModel } from 'src/app/models/user-model';
 import { UserService } from 'src/app/services/user.service';
+import { Handler } from 'src/app/utilities/handler';
 
 @Component({
   selector: 'app-confirm',
   templateUrl: './confirm.component.html',
   styleUrls: ['./confirm.component.css']
 })
-export class ConfirmComponent {
+export class ConfirmComponent extends Handler{
+
   codeNumber: string = '';
   count: number = 4;
 
-  error: string = '¡Debe confirmar su contraseña!';
-  wellcome: string = '¡Su cuenta ha sido creada!';
-
-  isLoading: boolean = false;
-  isDone: boolean = false;
-
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService) {
+    super();
+  }
 
   get isEnable() {
     return (this.codeNumber.length >= this.count);
@@ -41,8 +39,8 @@ export class ConfirmComponent {
     this.codeNumber = value;
   }
 
-  createAccount() {
-    this.isLoading = true;
+  createAccount() {   
+    this.showLoader();
     const password = this.codeNumber.substring(0, 4);       
     this.userService.getUserAccount().subscribe({
       next: (value) => {
@@ -51,20 +49,18 @@ export class ConfirmComponent {
           userAccount.budget = 0;
           this.userService.createAccount(userAccount).subscribe({
             next: (result) => {
-              if(result.status){                
+              this.hideLoader();
+              if(result.status){                               
                 this.router.navigateByUrl('/home');
               }else{
-                alert(result.obj);
+                this.showAlert(result.obj);
               }
-            },
-            complete: () => {
-              this.isLoading = false;
-            },
+            },            
           });
         } else {
-          this.isLoading = false;
+          this.hideLoader();
           this.codeNumber = '';
-          alert('¡La contraseña no coincide!');
+          this.showAlert('¡La contraseña no coincide!');
         }
       },
     });

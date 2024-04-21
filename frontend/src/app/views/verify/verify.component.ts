@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { Handler } from 'src/app/utilities/handler';
 
 @Component({
   selector: 'app-verify',
   templateUrl: './verify.component.html',
   styleUrls: ['./verify.component.css']
 })
-export class VerifyComponent {
+export class VerifyComponent extends Handler {
   codeNumber: string = '';
-  count: number = 4;
-  message: string = '¡Recivirá un mensaje con el número de verificación!';
-  phoneNumber: number = 0;
-  isLoading: boolean = false;  
- 
+  count: number = 4;  
+  phoneNumber: number = 0; 
 
   constructor(private router: Router, private userService: UserService) {   
+    super();
     this.initialize();
   }
 
@@ -41,7 +40,8 @@ export class VerifyComponent {
       next: (value) => {
         this.phoneNumber = value.phone;
          //the next line must be eliminited when the smss were done
-        this.message = `${this.message}  ${value.code}`;
+        const message = `¡Recivirá un mensaje con el número de verificación! ${value.code}`;
+        this.showAlert(message);
       },
     });
   }
@@ -53,19 +53,17 @@ export class VerifyComponent {
   goForward() {
     if (this.isEnable) {
       const typedcode = Number.parseInt(this.codeNumber.substring(0, 4));
+      this.showLoader();
       this.userService.verifyPhoneAndCode(this.phoneNumber,typedcode).subscribe({
-        next:(value)=> {
-          this.isLoading = true;          
+        next:(value)=> { 
+          this.hideLoader();                 
           if(value.obj){
             this.router.navigateByUrl('/idtype');
           }else{
             this.codeNumber = '';
             alert('¡Código incorrecto!');
           }          
-        },
-        complete: () => {
-          this.isLoading = false;          
-        },
+        },        
       });      
     }
   }

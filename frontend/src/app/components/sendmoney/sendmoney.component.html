@@ -24,6 +24,7 @@
 
     <div class="sl-input-group sl-secundary-input" style="margin-top: 1.5rem;">
         <button class="sl-width-100 sl-secundary-btn sl-btn" type="submit">ENVIAR</button>
-        <button class="sl-width-100 sl-secundary-btn sl-btn sl-mt-4" type="button">CANCELAR</button>
+        <button class="sl-width-100 sl-secundary-btn sl-btn sl-mt-4" type="button" (click)="cancel()">CANCELAR</button>
     </div>
 </form>
+<app-message [isVisible]="isAlerting" [message]="message" (aceptEvent)="resetAlert()"></app-message>

@@ -8,7 +8,7 @@
         </ul>
     </div>
     <div class="sl-width-80 sl-flex-column-center">
-        <app-sendmoney *ngIf="isSendmoney" style="width: 100%;"></app-sendmoney>
+        <app-sendmoney *ngIf="isSendmoney" style="width: 100%;"  (cancelEvent)="showHome()"></app-sendmoney>
         <app-ledger *ngIf="isLedger" style="width: 100%;"></app-ledger>
         <div *ngIf="isHome" class="sl-width-100">
             <app-whiteicon></app-whiteicon>
@@ -27,4 +27,3 @@
         </ul>
     </div>
 </section>
-<app-loader></app-loader>

@@ -3,23 +3,25 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserModel } from 'src/app/models/user-model';
 import { UserService } from 'src/app/services/user.service';
+import { Handler } from 'src/app/utilities/handler';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent {
+export class SigninComponent extends Handler {
 
   codeNumber: string = '';
   count: number = 4;
-  isLoading: boolean = false;
 
   signinForm = this.formBuilder.group({
     phone: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
   });
 
-  constructor(private router: Router, private userService: UserService, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private userService: UserService, private formBuilder: FormBuilder) {
+    super();
+  }
 
   get isEnable() {
     return (this.codeNumber.length >= this.count);
@@ -50,6 +52,8 @@ export class SigninComponent {
     this.codeNumber = value;
   }
 
+
+
   loadAccount(phoneNumber: number) {
     this.userService.getUserByPhone(phoneNumber).subscribe({
       next: (value) => {
@@ -64,21 +68,19 @@ export class SigninComponent {
       const user = new UserModel();
       user.phone = Number.parseInt(this.phoneValue!) || 0;
       user.password = this.codeNumber.substring(0, 4);
-      this.isLoading = true;
+      this.showLoader();
       this.userService.logInAccount(user).subscribe({
-        next: (value) => {         
+        next: (value) => {
+          this.hideLoader();
           if (value.status) {
             this.loadAccount(user.phone!);
             this.router.navigateByUrl('/home');
           } else {
             this.signinForm.reset();
-            this.codeNumber = '';           
-            alert(value.obj);
+            this.codeNumber = '';
+            this.showAlert(value.obj);
           }
-        },
-        complete: () => {
-          this.isLoading = false;
-        },
+        },        
       });
     }
   }

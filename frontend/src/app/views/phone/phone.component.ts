@@ -2,19 +2,22 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CodeModel } from 'src/app/models/code-model';
 import { UserService } from 'src/app/services/user.service';
+import { Handler } from 'src/app/utilities/handler';
 
 @Component({
   selector: 'app-phone',
   templateUrl: './phone.component.html',
   styleUrls: ['./phone.component.css']
 })
-export class PhoneComponent {
+export class PhoneComponent extends Handler {
 
   phoneNumber: string = '';
   count: number = 10;
-  isLoading: boolean = false;
+ 
 
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService) {
+    super();
+  }
 
   get isEnable() {
     return (this.phoneNumber.length == this.count);
@@ -23,20 +26,19 @@ export class PhoneComponent {
   generateCode() {
     const phone = Number.parseInt(this.phoneNumber.substring(0, 10));
     const codej = { phone } as CodeModel;
-    this.isLoading = true;
+    this.showLoader();
     this.userService.generateCode(codej).subscribe({
       next: (value) => { 
-        if (value.status) {
+        this.hideLoader(); 
+        if (value.status) {            
           const codemodel = value.obj as CodeModel;
           this.userService.setCode(codemodel);
           this.router.navigateByUrl('/verify');
-        }else{          
-          alert(value.obj);
+        }else{                       
+          this.showAlert(value.obj);
           this.phoneNumber = '';
           this.router.navigateByUrl('/phone');
         }
-      }, complete: () => {
-        this.isLoading = false;       
       },
     });
   }

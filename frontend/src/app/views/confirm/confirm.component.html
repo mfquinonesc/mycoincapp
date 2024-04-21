@@ -26,4 +26,4 @@
     </div>
 </section>
 <app-loader [isVisible]="isLoading"></app-loader>
-<app-message [isVisible]="isDone" [message]="wellcome"></app-message>
+<app-message [isVisible]="isAlerting" [message]="message" (aceptEvent)="hideAlert()"></app-message>
