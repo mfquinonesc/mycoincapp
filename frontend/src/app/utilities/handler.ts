@@ -13,7 +13,7 @@ export class Handler {
         return this._alertID;
     }
 
-    get isCancel() {
+    get hasCancel() {
         return this._hasCancel;
     }
 
@@ -64,7 +64,7 @@ export class Handler {
         return this._alertID;
     }
 
-    showAlertAndCancel(msg: string): number {
+    showConfirm(msg: string): number {
         this._hasCancel = true;
         return this.showAlert(msg);
     }

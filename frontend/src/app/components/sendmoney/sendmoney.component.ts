@@ -20,8 +20,7 @@ export class SendmoneyComponent extends Handler {
   });
 
   fromPhone: number = 0;
-  isDialog: boolean = false;
-  confirmMsg: string = '¿Está seguro de realizar esta transacción?';
+  handler: Handler = new Handler();
 
   @Output() cancelEvent = new EventEmitter<boolean>(false);
 
@@ -75,7 +74,7 @@ export class SendmoneyComponent extends Handler {
   }
 
   abort() {
-    this.isDialog = false;
+    this.handler.hideAlert();    
   }
 
   cancel() {
@@ -83,7 +82,7 @@ export class SendmoneyComponent extends Handler {
   }
 
   submit() {
-    this.isDialog = true;
+    this.handler.showConfirm('¿Está seguro de realizar esta transacción?');
   }
 
   doTransaction() {
