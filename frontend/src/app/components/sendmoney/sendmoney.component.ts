@@ -20,6 +20,8 @@ export class SendmoneyComponent extends Handler {
   });
 
   fromPhone: number = 0;
+  isDialog: boolean = false;
+  confirmMsg: string = '¿Está seguro de realizar esta transacción?';
 
   @Output() cancelEvent = new EventEmitter<boolean>(false);
 
@@ -28,9 +30,6 @@ export class SendmoneyComponent extends Handler {
     this.initialize();
   }
 
-  get isEnable() {
-    return true;
-  }
   get toPhone() {
     return this.transForm.controls.toPhone;
   }
@@ -71,13 +70,25 @@ export class SendmoneyComponent extends Handler {
     });
   }
 
+  acept() {
+    this.doTransaction();
+  }
+
+  abort() {
+    this.isDialog = false;
+  }
+
   cancel() {
     this.cancelEvent.emit(true);
   }
 
   submit() {
+    this.isDialog = true;
+  }
+
+  doTransaction() {
     if (this.transForm.valid) {
-      this.showLoader();          
+      this.showLoader();
       const transaction = {
         toPhone: this.toPhoneValue,
         fromPhone: this.fromPhone,
@@ -86,15 +97,15 @@ export class SendmoneyComponent extends Handler {
       } as TransactionModel;
       this.transactionService.sendTransaction(transaction).subscribe({
         next: (value) => {
-          this.hideLoader();      
-          if (value.status) { 
-            this.transForm.reset();             
+          this.hideLoader();
+          if (value.status) {
+            this.transForm.reset();
             this.showAlert('¡Transacción realizada!');
-          } else {                 
+          } else {
             this.showAlert(value.obj);
           }
-          this.updateButget();         
-        },       
+          this.updateButget();
+        },
       });
     }
   }

@@ -28,3 +28,4 @@
     </div>
 </form>
 <app-message [isVisible]="isAlerting" [message]="message" (aceptEvent)="resetAlert()"></app-message>
+<app-message [isVisible]="isDialog" [message]="confirmMsg" [hasCancel]="true" (aceptEvent)="acept()" (cancelEvent)="abort()"></app-message>
