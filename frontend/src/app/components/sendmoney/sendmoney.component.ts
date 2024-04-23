@@ -70,10 +70,12 @@ export class SendmoneyComponent extends Handler {
   }
 
   acept() {
+    this.handler.resetAlert();
     this.doTransaction();
   }
 
   abort() {
+    this.handler.resetAlert();
     this.handler.hideAlert();    
   }
 

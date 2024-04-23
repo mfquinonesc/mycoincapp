@@ -9,6 +9,9 @@ const codeRoutes = require('./routes/codeRoutes');
 const authRoutes = require('./routes/authRoutes');
 const transactionRoutes = require('./routes/transactionRoutes');
 
+// middleware to check if the user is log In 
+const middleware = require('./middleware/middleware');
+
 dotenv.config()
 
 //Loading variables
@@ -28,10 +31,10 @@ mongoose.connect(DB).then(() =>
     .catch((error) => console.log(error));
 
 //Configuring the routes
-app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/user', middleware.authenticate, userRoutes);
+app.use('/api/v1/transaction',middleware.authenticate, transactionRoutes);
 app.use('/api/v1/code', codeRoutes);
 app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/transaction', transactionRoutes);
 
 //Configuring the server 
 app.listen(3000, () => {

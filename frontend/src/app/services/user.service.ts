@@ -12,12 +12,21 @@ export class UserService {
 
   private _codeAccount = new BehaviorSubject<CodeModel>({ phone: 0 });
   private _userAccount = new BehaviorSubject<UserModel>(new UserModel());
+  private _token = new BehaviorSubject<string>('');
 
   pathCode: string = `${environment.path}/code`;
   pathAuth: string = `${environment.path}/auth`;
   pathUser: string = `${environment.path}/user`;
 
   constructor(private http: HttpClient) { }
+
+  setToken(value: string) {
+    this._token.next(value);
+  }
+
+  getToken(): Observable<string> {
+    return this._token.asObservable();
+  }
 
   setUserAccount(value: UserModel) {
     this._userAccount.next(value);

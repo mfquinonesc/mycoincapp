@@ -50,7 +50,8 @@ export class ConfirmComponent extends Handler{
           this.userService.createAccount(userAccount).subscribe({
             next: (result) => {
               this.hideLoader();
-              if(result.status){                               
+              if(result.status){   
+                this.userService.setToken(result.obj);                          
                 this.router.navigateByUrl('/home');
               }else{
                 this.showAlert(result.obj);

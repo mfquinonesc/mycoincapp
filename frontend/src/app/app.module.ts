@@ -23,7 +23,8 @@ import { SendmoneyComponent } from './components/sendmoney/sendmoney.component';
 import { LedgerComponent } from './components/ledger/ledger.component';
 import { WhiteiconComponent } from './components/whiteicon/whiteicon.component';
 import { InfoComponent } from './components/info/info.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './middleware/auth.interceptor';
 
 
 @NgModule({
@@ -56,7 +57,11 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule   
   ],
-  providers: [],
+  providers: [
+    { 
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
+     }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

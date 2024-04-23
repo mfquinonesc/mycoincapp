@@ -72,7 +72,8 @@ export class SigninComponent extends Handler {
       this.userService.logInAccount(user).subscribe({
         next: (value) => {
           this.hideLoader();
-          if (value.status) {
+          if (value.status) {           
+            this.userService.setToken(value.obj);
             this.loadAccount(user.phone!);
             this.router.navigateByUrl('/home');
           } else {
