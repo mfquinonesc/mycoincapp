@@ -26,8 +26,7 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/bulma/css/bulma.min.css",
-              "C:/Users/ADMIN/Desktop/newcss/css/index.css"
+              "node_modules/bulma/css/bulma.min.css"              
             ],
             "scripts": []
           },
@@ -96,8 +95,7 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/bulma/css/bulma.min.css",
-              "C:/Users/ADMIN/Desktop/newcss/css/index.css"
+              "node_modules/bulma/css/bulma.min.css"            
             ],
             "scripts": []
           }
